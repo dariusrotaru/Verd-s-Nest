@@ -1,3 +1,52 @@
+/* Set background color to black during loading */
+body {
+    background-color: #000; /* Ensure the background is black during loading */
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+/* Loading Screen Styles */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0); /* Black with some transparency */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    flex-direction: column;
+}
+
+/* Icon styles */
+.loading-icon img {
+    width: 300px;  /* Increased size */
+    height: 300px; /* Increased size */
+    margin-bottom: 20px; /* Space between the icon and the loading bar */
+}
+
+/* Loading Bar */
+.loading-bar {
+    width: 80%;
+    height: 10px;
+    background-color: #444;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.progress-bar {
+    width: 0;
+    height: 100%;
+    background-color: #4caf50;
+    border-radius: 5px;
+    transition: width 0.5s ease;
+}
+
+/* Other existing styles */
 * {
     margin: 0px;
     padding: 0px;
@@ -16,6 +65,7 @@ body {
 }
 
 .carousel {
+    display: flex;
     position: relative;
     width: 400px;
     height: 400px;

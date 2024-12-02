@@ -1,5 +1,8 @@
 const options = document.querySelectorAll('.menu-option');
 const totalOptions = options.length;
+const loadingScreen = document.getElementById('loading-screen');
+const progressBar = document.getElementById('progress-bar');
+const carousel = document.querySelector('.carousel');
 
 function updateCarousel(rotation) {
     options.forEach((option, i) => {
@@ -16,13 +19,34 @@ function updateCarousel(rotation) {
         option.style.opacity = opacity;
     });
 }
+
 const anglePerPanel = (2 * Math.PI) / totalOptions;
 let rotation = 0;
-document.addEventListener('keydown', (e) => {
-    if(e.repeat) { return }
-    if (e.key === 'ArrowLeft') rotation -= anglePerPanel;
-    if (e.key === 'ArrowRight') rotation += anglePerPanel;
-    updateCarousel(rotation);
-});
 
-updateCarousel(0); // Initial setup
+document.addEventListener('keydown', (e) => {
+    if(e.repeat) { return } // Avoid multiple triggers for the same key
+    if (e.key === 'ArrowLeft') rotation -= anglePerPanel; // Rotate left
+    if (e.key === 'ArrowRight') rotation += anglePerPanel; // Rotate right
+    updateCarousel(rotation); // Update the carousel based on the new rotation
+});
+updateCarousel(0); // Hide the loading screen
+carousel.style.display = 'none';
+
+// Simulate loading progress
+let progress = 0;
+const loadingInterval = setInterval(() => {
+    progress += 8;
+    progressBar.style.width = `${progress}%`;
+
+    if (progress < 100) {
+        // If not fully loaded, continue updating
+        requestAnimationFrame(updateProgress);
+    } else {
+        // Once fully loaded, show the carousel and hide loading screen
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';  // Hide the loading screen
+            carousel.style.display = 'flex';  // Show the carousel
+        }, 500);  // Optional delay for smooth transition
+    }
+
+}, 50); // Update progress every 30ms
