@@ -34,19 +34,26 @@ carousel.style.display = 'none';
 
 // Simulate loading progress
 let progress = 0;
+const progressBarLeft = document.createElement('div');
+progressBarLeft.id = 'progress-left';
+progressBarLeft.classList.add('progress-bar');
+document.querySelector('.loading-bar').appendChild(progressBarLeft);
+
+const progressBarRight = document.createElement('div');
+progressBarRight.id = 'progress-right';
+progressBarRight.classList.add('progress-bar');
+document.querySelector('.loading-bar').appendChild(progressBarRight);
+
 const loadingInterval = setInterval(() => {
     progress += 8;
-    progressBar.style.width = `${progress}%`;
+    progressBarLeft.style.width = `${progress / 2}%`;
+    progressBarRight.style.width = `${progress / 2}%`;
 
-    if (progress < 100) {
-        // If not fully loaded, continue updating
-        requestAnimationFrame(updateProgress);
-    } else {
-        // Once fully loaded, show the carousel and hide loading screen
+    if (progress >= 100) {
+        clearInterval(loadingInterval);
         setTimeout(() => {
-            loadingScreen.style.display = 'none';  // Hide the loading screen
-            carousel.style.display = 'flex';  // Show the carousel
-        }, 500);  // Optional delay for smooth transition
+            loadingScreen.style.display = 'none'; // Hide loading screen
+            carousel.style.display = 'flex'; // Show carousel
+        }, 500); // Optional delay for smooth transition
     }
-
-}, 50); // Update progress every 30ms
+}, 50); // Update progress every 50ms

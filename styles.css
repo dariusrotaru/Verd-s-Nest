@@ -13,7 +13,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0); /* Black with some transparency */
+    background-color: ();
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,29 +21,51 @@ body {
     flex-direction: column;
 }
 
+/* Bisected Gradient Bar */
+.loading-bar {
+    position: relative;
+    width: 80%;
+    height: 20px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: #222;
+}
+
+/* Left and Right Progress Bars */
+.progress-bar {
+    position: absolute;
+    height: 100%;
+    background: linear-gradient(135deg, #0078ff, #9600ff);
+    transform-origin: center;
+    transition: width 0.5s ease;
+
+}
+
+/* Left Side Progress */
+#progress-left {
+    left: calc(50% + 5px); /* Start slightly to the right of center */
+    left: 50%; /* Start at the center */
+    transform-origin: right center; /* Expand outward to the left */
+}
+
+/* Right Side Progress */
+#progress-right {
+    right: calc(50% + 5px); /* Start slightly to the left of center */
+    right: 50%; /* Start at the center */
+    transform-origin: left center; /* Expand outward to the right */
+}
+
+
+
+
 /* Icon styles */
 .loading-icon img {
     width: 300px;  /* Increased size */
     height: 300px; /* Increased size */
     margin-bottom: 20px; /* Space between the icon and the loading bar */
-}
-
-/* Loading Bar */
-.loading-bar {
-    width: 80%;
-    height: 10px;
-    background-color: #444;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    position: relative;
-}
-
-.progress-bar {
-    width: 0;
-    height: 100%;
-    background-color: #4caf50;
-    border-radius: 5px;
-    transition: width 0.5s ease;
 }
 
 /* Other existing styles */
